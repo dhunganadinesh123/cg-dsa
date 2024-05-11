@@ -1,0 +1,44 @@
+CG PRACTICLE FOR LINE DRAWING ALGORITHM
+#include<stdio.h>
+#include<graphics.h>
+
+int main() {
+    int gd = DETECT, gm;
+    initgraph(&gd, &gm, "");
+
+    int x1, y1, x2, y2;
+    int dx, dy, steps, k;
+    float xi, yi, x, y;
+
+    printf("Enter coordinates of first point (x1 y1): ");
+    scanf("%d %d", &x1, &y1);
+
+    printf("Enter coordinates of second point (x2 y2): ");
+    scanf("%d %d", &x2, &y2);
+
+    dx = x2 - x1;
+    dy = y2 - y1;
+
+    if(abs(dx) > abs(dy))
+        steps = abs(dx);
+    else
+        steps = abs(dy);
+
+    xi = (float) dx / (float) steps;
+    yi = (float) dy / (float) steps;
+
+    x = x1;
+    y = y1;
+
+    putpixel(round(x), round(y), WHITE);
+
+    for(k = 0; k < steps; k++) {
+        x += xi;
+        y += yi;
+        putpixel(round(x), round(y), WHITE);
+    }
+
+    getch();
+    closegraph();
+    return 0;
+}
