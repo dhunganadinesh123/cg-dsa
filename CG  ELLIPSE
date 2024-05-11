@@ -1,0 +1,68 @@
+#include<stdio.h>
+#include<graphics.h>
+
+int main() {
+    int gd = DETECT, gm;
+    initgraph(&gd, &gm, "");
+
+    int xc, yc, rx, ry;
+    int x, y;
+    int rxSq, rySq;
+    int twoRxSq, twoRySq;
+    int p;
+    
+    printf("Enter coordinates of center (xc yc): ");
+    scanf("%d %d", &xc, &yc);
+
+    printf("Enter major axis length (rx): ");
+    scanf("%d", &rx);
+
+    printf("Enter minor axis length (ry): ");
+    scanf("%d", &ry);
+
+    x = 0;
+    y = ry;
+    rxSq = rx * rx;
+    rySq = ry * ry;
+    twoRxSq = 2 * rxSq;
+    twoRySq = 2 * rySq;
+    p = rySq - rxSq * ry + 0.25 * rxSq;
+
+    while (twoRySq * x < twoRxSq * y) {
+        putpixel(xc + x, yc + y, WHITE);
+        putpixel(xc - x, yc + y, WHITE);
+        putpixel(xc + x, yc - y, WHITE);
+        putpixel(xc - x, yc - y, WHITE);
+
+        x++;
+
+        if (p < 0)
+            p += twoRySq * x + rySq;
+        else {
+            y--;
+            p += twoRySq * x - twoRxSq * y + rySq;
+        }
+    }
+
+    p = rySq * (x + 0.5) * (x + 0.5) + rxSq * (y - 1) * (y - 1) - rxSq * rySq;
+
+    while (y >= 0) {
+        putpixel(xc + x, yc + y, WHITE);
+        putpixel(xc - x, yc + y, WHITE);
+        putpixel(xc + x, yc - y, WHITE);
+        putpixel(xc - x, yc - y, WHITE);
+
+        y--;
+
+        if (p > 0)
+            p += rxSq - 2 * rySq * y;
+        else {
+            x++;
+            p += twoRySq * x - twoRxSq * y + rxSq;
+        }
+    }
+
+    getch();
+    closegraph();
+    return 0;
+}
