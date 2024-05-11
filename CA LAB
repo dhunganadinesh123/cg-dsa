@@ -1,0 +1,158 @@
+AND Gate:
+
+library IEEE;
+use IEEE.STD_LOGIC_1164.ALL;
+
+entity AND_GATE is
+    Port ( A, B : in  STD_LOGIC;
+           Y    : out STD_LOGIC);
+end AND_GATE;
+
+architecture Behavioral of AND_GATE is
+begin
+    Y <= A and B;
+end Behavioral;
+---------------------------------------------
+OR Gate:
+library IEEE;
+use IEEE.STD_LOGIC_1164.ALL;
+
+entity OR_GATE is
+    Port ( A, B : in  STD_LOGIC;
+           Y    : out STD_LOGIC);
+end OR_GATE;
+
+architecture Behavioral of OR_GATE is
+begin
+    Y <= A or B;
+end Behavioral;
+---------------------------------------------
+NOT Gate:
+library IEEE;
+use IEEE.STD_LOGIC_1164.ALL;
+
+entity NOT_GATE is
+    Port ( A : in  STD_LOGIC;
+           Y    : out STD_LOGIC);
+end NOT_GATE;
+
+architecture Behavioral of NOT_GATE is
+begin
+    Y <= not A;
+end Behavioral;
+---------------------------------------------
+XOR Gate:
+library IEEE;
+use IEEE.STD_LOGIC_1164.ALL;
+
+entity XOR_GATE is
+    Port ( A, B : in  STD_LOGIC;
+           Y    : out STD_LOGIC);
+end XOR_GATE;
+
+architecture Behavioral of XOR_GATE is
+begin
+    Y <= A xor B;
+end Behavioral;
+---------------------------------------------
+Full Adder:
+library IEEE;
+use IEEE.STD_LOGIC_1164.ALL;
+
+entity FULL_ADDER is
+    Port ( A, B, Cin : in  STD_LOGIC;
+           Sum, Cout : out STD_LOGIC);
+end FULL_ADDER;
+
+architecture Behavioral of FULL_ADDER is
+begin
+    Sum <= (A xor B) xor Cin;
+    Cout <= (A and B) or (Cin and (A xor B));
+end Behavioral;
+---------------------------------------------
+Half Adder:
+library IEEE;
+use IEEE.STD_LOGIC_1164.ALL;
+
+entity HALF_ADDER is
+    Port ( A, B : in  STD_LOGIC;
+           Sum, Cout : out STD_LOGIC);
+end HALF_ADDER;
+
+architecture Behavioral of HALF_ADDER is
+begin
+    Sum <= A xor B;
+    Cout <= A and B;
+end Behavioral;
+------------------------------------------------
+NAND Gate:
+library IEEE;
+use IEEE.STD_LOGIC_1164.ALL;
+
+entity NAND_GATE is
+    Port ( A, B : in  STD_LOGIC;
+           Y    : out STD_LOGIC);
+end NAND_GATE;
+
+architecture Behavioral of NAND_GATE is
+begin
+    Y <= not (A and B);
+end Behavioral;
+-----------------------------------------
+NOR Gate:
+library IEEE;
+use IEEE.STD_LOGIC_1164.ALL;
+
+entity NOR_GATE is
+    Port ( A, B : in  STD_LOGIC;
+           Y    : out STD_LOGIC);
+end NOR_GATE;
+
+architecture Behavioral of NOR_GATE is
+begin
+    Y <= not (A or B);
+end Behavioral;
+---------------------------------------------
+3-to-8 Decoder:
+library IEEE;
+use IEEE.STD_LOGIC_1164.ALL;
+
+entity DECODER_3_TO_8 is
+    Port ( A : in  STD_LOGIC_VECTOR (2 downto 0);
+           Y : out STD_LOGIC_VECTOR (7 downto 0));
+end DECODER_3_TO_8;
+
+architecture Behavioral of DECODER_3_TO_8 is
+begin
+    with A select
+        Y <= "00000001" when "000",
+             "00000010" when "001",
+             "00000100" when "010",
+             "00001000" when "011",
+             "00010000" when "100",
+             "00100000" when "101",
+             "01000000" when "110",
+             "10000000" when others;
+end Behavioral;
+---------------------------------------------
+8-to-3 Encoder:
+library IEEE;
+use IEEE.STD_LOGIC_1164.ALL;
+
+entity ENCODER_8_TO_3 is
+    Port ( A : in  STD_LOGIC_VECTOR (7 downto 0);
+           Y : out STD_LOGIC_VECTOR (2 downto 0));
+end ENCODER_8_TO_3;
+
+architecture Behavioral of ENCODER_8_TO_3 is
+begin
+    with A select
+        Y <= "000" when "00000001",
+             "001" when "00000010",
+             "010" when "00000100",
+             "011" when "00001000",
+             "100" when "00010000",
+             "101" when "00100000",
+             "110" when "01000000",
+             "111" when "10000000";
+end Behavioral;
