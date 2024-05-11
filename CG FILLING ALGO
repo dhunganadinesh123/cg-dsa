@@ -1,0 +1,32 @@
+#include<stdio.h>
+#include<graphics.h>
+
+void boundaryFill(int x, int y, int f_color, int b_color) {
+    if (getpixel(x, y) != b_color && getpixel(x, y) != f_color) {
+        putpixel(x, y, f_color);
+        boundaryFill(x + 1, y, f_color, b_color);
+        boundaryFill(x - 1, y, f_color, b_color);
+        boundaryFill(x, y + 1, f_color, b_color);
+        boundaryFill(x, y - 1, f_color, b_color);
+    }
+}
+
+int main() {
+    int gd = DETECT, gm;
+    initgraph(&gd, &gm, "C:\\TURBOCC3\\BGI");
+
+    int x1, y1, x2, y2;
+    
+    printf("Enter coordinates of top-left corner (x1 y1): ");
+    scanf("%d %d", &x1, &y1);
+
+    printf("Enter coordinates of bottom-right corner (x2 y2): ");
+    scanf("%d %d", &x2, &y2);
+
+    rectangle(x1, y1, x2, y2);
+    boundaryFill(x1 + 1, y1 + 1, WHITE, BLACK);
+
+    getch();
+    closegraph();
+    return 0;
+}
